@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="SingDBConn">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/Topic0_1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
