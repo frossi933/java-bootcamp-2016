@@ -7,32 +7,23 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple calculator.
  */
-public class SimpleCalcTest
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public SimpleCalcTest( String testName )
-    {
+public class SimpleCalcTest extends TestCase {
+
+    SimpleCalc calc;
+
+    public SimpleCalcTest( String testName ) {
         super( testName );
+        calc = new SimpleCalc();
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
+    public static Test suite() {
         return new TestSuite( SimpleCalcTest.class );
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testSimpleCalc()
-    {
-        assertTrue( true );
+    public void testSimpleCalc() {
+
+        assertEquals(4, calc.eval(2,2,"+"));
+        assertTrue(5 != calc.eval(2,2,"+"));
+        assertEquals(2, calc.eval(5,2,"/"));
     }
 }

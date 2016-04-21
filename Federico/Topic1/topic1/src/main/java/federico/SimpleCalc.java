@@ -27,7 +27,7 @@ public class SimpleCalc{
         return s;
     }
 
-    private int eval(int n1, int n2, String op){
+    public int eval(int n1, int n2, String op){
         switch (op){
             case "+": return n1 + n2;
             case "-": return n1 - n2;
