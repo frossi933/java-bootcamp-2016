@@ -10,7 +10,6 @@ public class SingDBConn {
     private DBConnection conn;
     private static SingDBConn db = null;
 
-    /* Should I use getters/setters ? */
     private static String url = "jdbc:mysql://localhost:3306/db";
     private static String user = "username";
     private static String pass = "password";

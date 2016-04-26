@@ -4,5 +4,6 @@
 public interface DBConnection {
 
     public void connect(String url, String user, String pass) throws Exception;
+    public void release();
     // ...
 }

@@ -12,23 +12,27 @@ public class BuilderSQLServer implements BuilderConnection {
     private String pass;
 
     @Override
-    public void buildUser(String user) {
+    public BuilderConnection buildUser(String user) {
         this.user = user;
+        return this;
     }
 
     @Override
-    public void buildPassword(String pass) {
+    public BuilderConnection buildPassword(String pass) {
         this.pass = pass;
+        return this;
     }
 
     @Override
-    public void buildDriver() {
+    public BuilderConnection buildDriver() {
         /* It's empty because applications no longer need to explicitly load JDBC drivers since JDBC 4.0 (JDK 6.0)*/
+        return this;
     }
 
     @Override
-    public void buildUrl(String url) {
+    public BuilderConnection buildUrl(String url) {
         this.url = "jdbc:sqlserver://" + url;
+        return this;
     }
 
     @Override

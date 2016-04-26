@@ -7,10 +7,10 @@ import java.sql.Connection;
  */
 public interface BuilderConnection {
 
-    void buildUser(String user);
-    void buildPassword(String pass);
-    void buildUrl(String url);
-    void buildDriver();
+    BuilderConnection buildUser(String user);
+    BuilderConnection buildPassword(String pass);
+    BuilderConnection buildUrl(String url);
+    BuilderConnection buildDriver();
 
     Connection getConnection();
 }

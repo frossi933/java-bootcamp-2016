@@ -14,12 +14,8 @@ public class DirectorConn {
     }
 
     public void constructConn(){
-        if(builder!=null){
-            builder.buildDriver();
-            builder.buildUser(user);
-            builder.buildPassword(pass);
-            builder.buildUrl(url);
-        }
+        if(builder!=null)
+            builder = builder.buildDriver().buildUser(user).buildPassword(pass).buildUrl(url);
     }
 
     public Connection getConnection(){
