@@ -37,7 +37,7 @@ public class ServiceShoppingCartImp implements ServiceShoppingCart {
         for(int i=1;i<=quantity;i++)
             if(!products.add(prod)){
                 /* Remove previously added products */
-                rmMultipleProducts(prod,i-1);
+                rmMultipleProducts(prod.getId(),i-1);
                 return false;
             }
 
@@ -45,28 +45,45 @@ public class ServiceShoppingCartImp implements ServiceShoppingCart {
         return true;
     }
 
-    public boolean rmProduct(Product prod) {
-        if(prod != null && products.remove(prod)){
-            amount -= prod.getPrice();
-            return true;
+    public boolean rmProduct(String id) {
+        for(Product p : products){
+            if(p.getId().equals(id))
+                if(products.remove(p)) {
+                    amount -= p.getPrice();
+                    return true;
+                } else
+                    break;
         }
-
         return false;
     }
 
-    public boolean rmMultipleProducts(Product prod, int quantity) {
-        if(quantity<=0 || prod == null)
+    /**
+     *
+     * @param id
+     * @param quantity
+     * @return true if "quantity" items (identified by "id") were removed from the list.
+     *         false otherwise (maybe some of them were removed)
+     */
+    public boolean rmMultipleProducts(String id, int quantity) {
+        if(quantity<=0 || id == null)
             return false;
 
-        for(int i=1;i<=quantity;i++)
-            if(!products.remove(prod)){
-                /* Add previously removed products */
-                addMultipleProducts(prod,i-1);
-                return false;
+        int deleted = 0;
+        for(Product p : products) {
+
+            if (p.getId() == id){
+                if(products.remove(p)) {
+                    amount -= p.getPrice();
+                    deleted++;
+                } else
+                    return false;
             }
 
-        amount -= (prod.getPrice() * quantity);
-        return true;
+            if(quantity == deleted)
+                return true;
+        }
+
+        return false;
     }
 
     public void clearProducts() {

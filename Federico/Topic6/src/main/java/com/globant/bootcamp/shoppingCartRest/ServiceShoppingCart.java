@@ -14,9 +14,9 @@ public interface ServiceShoppingCart {
 
     boolean addMultipleProducts(Product prod, int quantity);
 
-    boolean rmProduct(Product prod);
+    boolean rmProduct(String id);
 
-    boolean rmMultipleProducts(Product prod, int quantity);
+    boolean rmMultipleProducts(String id, int quantity);
 
     void clearProducts();
 

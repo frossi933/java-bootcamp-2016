@@ -2,12 +2,11 @@ package com.globant.bootcamp.shoppingCartRest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 public class ShoppingCartController {
 
     private ServiceShoppingCart cart;
@@ -30,10 +29,21 @@ public class ShoppingCartController {
     }
 
     @RequestMapping(value = "/cart", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteProduct(@RequestBody Product prod){
-        if(cart.rmProduct(prod))
+    public ResponseEntity<String> deleteProduct(@RequestParam(value = "id") String id){
+        if(cart.rmProduct(id))
             return new ResponseEntity<>("product deleted", HttpStatus.OK);
         else
             return new ResponseEntity<>("product not deleted", HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/cart", method = RequestMethod.PUT)
+    public ResponseEntity<String> putProduct(@RequestParam(value = "id") String id, @RequestBody Product prod){
+        if(prod.getId() != id)
+            return new ResponseEntity<>("Incorrect id", HttpStatus.BAD_REQUEST);
+
+        if(cart.rmProduct(id) && cart.addProduct(prod))
+            return new ResponseEntity<>("Product updated", HttpStatus.OK);
+        else
+            return new ResponseEntity<>("Product not updated", HttpStatus.BAD_REQUEST);
     }
 }
