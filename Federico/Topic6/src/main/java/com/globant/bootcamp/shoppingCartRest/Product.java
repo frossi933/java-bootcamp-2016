@@ -1,19 +1,24 @@
 package com.globant.bootcamp.shoppingCartRest;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Product {
 
-    private String id;
+    @Id @GeneratedValue
+    private long id;
+
     private String name;
     private double price;
     private String desc;
 
-    public Product () {}
+    protected Product () {}
 
     public Product(String name, double price){
         this.price = price;
         this.name = name;
-        Integer code = name.hashCode();
-        this.id = code.toString();
     }
 
     public void setPrice(double price) {
@@ -22,8 +27,6 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
-        Integer code = name.hashCode();
-        this.id = code.toString();
     }
 
     public void setDesc(String desc) {
@@ -34,7 +37,7 @@ public class Product {
         return name;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
@@ -53,12 +56,12 @@ public class Product {
 
         Product product = (Product) o;
 
-        return getId().equals(product.getId());
+        return (getId() == product.getId());
     }
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return (int)getId();
     }
 
     @Override

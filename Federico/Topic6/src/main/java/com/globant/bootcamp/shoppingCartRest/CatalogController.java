@@ -1,5 +1,6 @@
 package com.globant.bootcamp.shoppingCartRest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,18 +12,21 @@ public class CatalogController {
 
     private ServiceCatalog catalog = null;
 
-    protected CatalogController (){
-        catalog = ServiceCatalogFactory.getServiceCatalogHashMap();
+    @Autowired
+    protected CatalogController (ProductRepository repo){
+
+        //catalog = ServiceCatalogFactory.getServiceCatalogHashMap();
+        catalog = ServiceCatalogFactory.getServiceCatalogJPA(repo);
     }
 
     // PREGUNTAR COMO HACER
     @RequestMapping(value = "/catalogs",method = RequestMethod.GET)
-    public List<Product> getProducts(){
+    public Iterable<Product> getProducts(){
         return catalog.getAllProducts();
     }
 
     @RequestMapping(value = "/catalog",method = RequestMethod.GET)
-    public Product getProduct(@RequestParam(value="id") String id){
+    public Product getProduct(@RequestParam(value="id") long id){
         return catalog.getProduct(id);
     }
 
@@ -35,7 +39,7 @@ public class CatalogController {
     }
 
     @RequestMapping(value = "/catalog",method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteProduct(@RequestParam(value="id") String id){
+    public ResponseEntity<String> deleteProduct(@RequestParam(value="id") long id){
         if(catalog.deleteProduct(id))
             return new ResponseEntity<String>("Product deleted", HttpStatus.OK);
         else

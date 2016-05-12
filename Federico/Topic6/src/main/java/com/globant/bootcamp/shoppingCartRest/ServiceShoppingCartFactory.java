@@ -8,10 +8,7 @@ public class ServiceShoppingCartFactory {
         return new ServiceShoppingCartImp();
     }
 
-    /* Another possible implementation, which uses a database:
-
-    public ServiceShoppingCart getShoppingCartSqlImp(){
-
+    public static ServiceShoppingCart getShoppingCartJPA(ProductRepository repository){
+        return new ServiceShoppingCartJPA(repository);
     }
-     */
 }

@@ -45,9 +45,9 @@ public class ServiceShoppingCartImp implements ServiceShoppingCart {
         return true;
     }
 
-    public boolean rmProduct(String id) {
+    public boolean rmProduct(long id) {
         for(Product p : products){
-            if(p.getId().equals(id))
+            if(p.getId() == id)
                 if(products.remove(p)) {
                     amount -= p.getPrice();
                     return true;
@@ -64,8 +64,8 @@ public class ServiceShoppingCartImp implements ServiceShoppingCart {
      * @return true if "quantity" items (identified by "id") were removed from the list.
      *         false otherwise (maybe some of them were removed)
      */
-    public boolean rmMultipleProducts(String id, int quantity) {
-        if(quantity<=0 || id == null)
+    public boolean rmMultipleProducts(long id, int quantity) {
+        if(quantity<=0)
             return false;
 
         int deleted = 0;
@@ -94,7 +94,7 @@ public class ServiceShoppingCartImp implements ServiceShoppingCart {
         return amount;
     }
 
-    public List<Product> getProductList() {
+    public Iterable<Product> getProductList() {
         return new LinkedList<Product>(products);
     }
 

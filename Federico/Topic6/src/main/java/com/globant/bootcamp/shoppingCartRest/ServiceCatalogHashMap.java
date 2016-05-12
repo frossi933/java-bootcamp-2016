@@ -6,29 +6,29 @@ import java.util.List;
 
 public class ServiceCatalogHashMap implements ServiceCatalog {
 
-    private HashMap<String, Product> catalog;
+    private HashMap<Long, Product> catalog;
 
     public ServiceCatalogHashMap(){
-        catalog = new HashMap<String, Product>();
+        catalog = new HashMap<Long, Product>();
     }
 
-    public boolean newProduct(String id, Product prod) {
+    public boolean newProduct(long id, Product prod) {
         return (catalog.putIfAbsent(id, prod) == null);
     }
 
-    public boolean deleteProduct(String id) {
+    public boolean deleteProduct(long id) {
         return (catalog.remove(id) != null);
     }
 
-    public boolean updateProduct(String id, Product newProd) {
+    public boolean updateProduct(long id, Product newProd) {
         return (catalog.replace(id, newProd) != null);
     }
 
-    public Product getProduct(String id) {
+    public Product getProduct(long id) {
         return catalog.get(id);
     }
 
-    public List<Product> getAllProducts() {
+    public Iterable<Product> getAllProducts() {
         return new LinkedList<Product>(catalog.values());
     }
 }

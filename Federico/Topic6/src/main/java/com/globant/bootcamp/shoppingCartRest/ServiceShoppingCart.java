@@ -14,16 +14,16 @@ public interface ServiceShoppingCart {
 
     boolean addMultipleProducts(Product prod, int quantity);
 
-    boolean rmProduct(String id);
+    boolean rmProduct(long id);
 
-    boolean rmMultipleProducts(String id, int quantity);
+    boolean rmMultipleProducts(long id, int quantity);
 
     void clearProducts();
 
     /* do not use double to represent money in real projects */
     double getTotal();
 
-    List<Product> getProductList();
+    Iterable<Product> getProductList();
 
     Sale buy();
 }

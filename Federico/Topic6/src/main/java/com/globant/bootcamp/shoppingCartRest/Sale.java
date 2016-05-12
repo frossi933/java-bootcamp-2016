@@ -7,10 +7,13 @@ public class Sale {
     private double total = 0.0;
     private LinkedList<Product> products;
 
-    public Sale(LinkedList<Product> products){
-        this.products = products;
-        for(Product p : products)
+    public Sale(Iterable<Product> products){
+        this.products = new LinkedList<>();
+        for(Product p : products){
+            this.products.add(p);
             total+=p.getPrice();
+        }
+
     }
 
     public double getTotal() {

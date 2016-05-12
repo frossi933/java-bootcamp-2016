@@ -1,5 +1,6 @@
 package com.globant.bootcamp.shoppingCartRest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,12 +12,15 @@ public class ShoppingCartController {
 
     private ServiceShoppingCart cart;
 
-    protected ShoppingCartController(){
-        cart = ServiceShoppingCartFactory.getShoppingCartImp();
+    @Autowired
+    protected ShoppingCartController(ProductRepository repository){
+
+        //cart = ServiceShoppingCartFactory.getShoppingCartImp();
+        cart = ServiceShoppingCartFactory.getShoppingCartJPA(repository);
     }
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
-    public ResponseEntity<List<Product>> getProducts(){
+    public ResponseEntity<Iterable<Product>> getProducts(){
         return new ResponseEntity<>(cart.getProductList(), HttpStatus.OK);
     }
 
@@ -29,7 +33,7 @@ public class ShoppingCartController {
     }
 
     @RequestMapping(value = "/cart", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteProduct(@RequestParam(value = "id") String id){
+    public ResponseEntity<String> deleteProduct(@RequestParam(value = "id") long id){
         if(cart.rmProduct(id))
             return new ResponseEntity<>("product deleted", HttpStatus.OK);
         else
@@ -37,11 +41,11 @@ public class ShoppingCartController {
     }
 
     @RequestMapping(value = "/cart", method = RequestMethod.PUT)
-    public ResponseEntity<String> putProduct(@RequestParam(value = "id") String id, @RequestBody Product prod){
+    public ResponseEntity<String> putProduct(@RequestParam(value = "id") long id, @RequestBody Product prod){
         if(prod.getId() != id)
             return new ResponseEntity<>("Incorrect id", HttpStatus.BAD_REQUEST);
 
-        if(cart.rmProduct(id) && cart.addProduct(prod))
+        if(cart.addProduct(prod))
             return new ResponseEntity<>("Product updated", HttpStatus.OK);
         else
             return new ResponseEntity<>("Product not updated", HttpStatus.BAD_REQUEST);
