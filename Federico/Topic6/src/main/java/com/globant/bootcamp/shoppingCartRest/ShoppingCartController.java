@@ -50,4 +50,12 @@ public class ShoppingCartController {
         else
             return new ResponseEntity<>("Product not updated", HttpStatus.BAD_REQUEST);
     }
+
+    @RequestMapping(value= "/cart/buy", method = RequestMethod.GET)
+    public ResponseEntity<Sale> getSale(@RequestParam(value = "payment", defaultValue = "Cash") String payment){
+        if(cart.isEmpty())
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+
+        return new ResponseEntity<Sale>(new Sale(cart.getProductList(),payment), HttpStatus.OK);
+    }
 }

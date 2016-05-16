@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ServiceShoppingCartImp implements ServiceShoppingCart {
 
-    private String paymentMethod;
+    private String paymentMethod = "Cash";
     private LinkedList<Product> products;
     private double amount = 0.0;
 
@@ -99,6 +99,6 @@ public class ServiceShoppingCartImp implements ServiceShoppingCart {
     }
 
     public Sale buy() {
-        return new Sale(products);
+        return new Sale(products, paymentMethod);
     }
 }

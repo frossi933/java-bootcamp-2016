@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ServiceShoppingCartJPA implements ServiceShoppingCart {
 
-    private String paymentMethod;
+    private String paymentMethod = "Cash";
     private double total = 0;
     private ProductRepository repo;
 
@@ -81,6 +81,6 @@ public class ServiceShoppingCartJPA implements ServiceShoppingCart {
 
     @Override
     public Sale buy() {
-        return new Sale(repo.findAll());
+        return new Sale(repo.findAll(), paymentMethod);
     }
 }

@@ -1,13 +1,21 @@
 package com.globant.bootcamp.shoppingCartRest;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.LinkedList;
 
+@Entity
 public class Sale {
 
+    @Id @GeneratedValue
+    private long id;
     private double total = 0.0;
+    private String paymentMethod;
     private LinkedList<Product> products;
 
-    public Sale(Iterable<Product> products){
+    public Sale(Iterable<Product> products, String paymentMethod){
+        this.paymentMethod = paymentMethod;
         this.products = new LinkedList<>();
         for(Product p : products){
             this.products.add(p);
@@ -21,7 +29,7 @@ public class Sale {
     }
 
     public LinkedList<Product> getProducts() {
-        return new LinkedList<Product>(products);
+        return new LinkedList<>(products);
     }
 
     @Override
