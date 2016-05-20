@@ -4,9 +4,7 @@ import com.globant.bootcamp.finalshopping.model.User;
 import com.globant.bootcamp.finalshopping.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Created by root on 5/16/16.
- */
+
 public class UserServiceJPA implements UserService {
 
     private UserRepository repo;

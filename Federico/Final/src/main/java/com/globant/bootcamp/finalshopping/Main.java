@@ -25,32 +25,13 @@ public class Main {
     @Bean
     public CommandLineRunner demo(UserRepository repository) {
         return (args) -> {
-            // save a couple of customers
-            repository.save(new User("Jack"));
-            repository.save(new User("Chloe"));
-
-            // fetch all customers
-            /*g.info("Customers found with findAll():");
-            log.info("-------------------------------");
-            for (Product p : repository.findAll()) {
-                log.info(p.toString());
+            User admin = repository.getByName("admin");
+            if(admin == null){
+                admin = new User("admin");
+                admin.setPassword("admin");
+                repository.save(admin);
             }
-            log.info("");
 
-            // fetch an individual customer by ID
-            Product prod = repository.findOne(1L);
-            log.info("Product found with findOne(1L):");
-            log.info("--------------------------------");
-            log.info(prod.toString());
-            log.info("");
-
-            // fetch customers by last name
-            log.info("Customer found with findByName('Jack'):");
-            log.info("--------------------------------------------");
-            for (Product bauer : repository.findByName("Jack")) {
-                log.info(bauer.toString());
-            }
-            log.info("");*/
         };
     }
 

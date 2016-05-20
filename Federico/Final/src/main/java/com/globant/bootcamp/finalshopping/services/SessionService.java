@@ -5,7 +5,7 @@ import com.globant.bootcamp.finalshopping.model.Session;
 
 public interface SessionService {
 
-    boolean add(Session session);
+    String create(String username);
     boolean check(String token, String username);
 
 

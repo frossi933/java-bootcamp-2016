@@ -20,14 +20,15 @@ public class SessionServiceJPA implements SessionService {
     }
 
     @Override
-    public boolean add(Session session) {
-        Session old = repo.findByUsername(session.getUsername());
+    public String create(String username) {
+        Session old = repo.findByUsername(username);
         if(old != null)
             /* It is already logged */
             repo.delete(old);
 
+        Session session = new Session(username);
         repo.save(session);
-        return true;
+        return session.getToken();
     }
 
     @Override

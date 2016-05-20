@@ -1,6 +1,8 @@
 package com.globant.bootcamp.finalshopping.model;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -8,23 +10,28 @@ import javax.persistence.*;
 import java.util.LinkedList;
 
 @Entity
+@ApiModel(value = "Sale entity", description = "Represents a final purchase")
 public class Sale {
 
     public enum Mode {
         CASH, CREDIT_CARD, PAYPAL;
     }
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
+    @ApiModelProperty(value = "Sale identifier")
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @ApiModelProperty(value = "Purchaser user", required = true)
     private User user;
-
+    @ApiModelProperty(value = "Products purchased", required = true)
     private LinkedList<Product> products;
+    @ApiModelProperty(value = "Payment method", required = true)
     private Mode mode;
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @ApiModelProperty(value = "Date of purchase", required = true)
     private DateTime date;
+    @ApiModelProperty(value = "Total cost", required = true)
     private long total;
 
     public Sale(){}
@@ -79,5 +86,33 @@ public class Sale {
 
     public void setTotal(long total) {
         this.total = total;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sale)) return false;
+
+        Sale sale = (Sale) o;
+
+        return getId() == sale.getId();
+
+    }
+
+    @Override
+    public int hashCode() {
+        return getId();
+    }
+
+    @Override
+    public String toString() {
+        return "Sale{" +
+                "id=" + id +
+                ", user=" + user +
+                ", products=" + products +
+                ", mode=" + mode +
+                ", date=" + date +
+                ", total=" + total +
+                '}';
     }
 }

@@ -2,7 +2,6 @@ package com.globant.bootcamp.finalshopping.services;
 
 
 import com.globant.bootcamp.finalshopping.model.Cart;
-import com.globant.bootcamp.finalshopping.model.Sale;
 import com.globant.bootcamp.finalshopping.model.User;
 import com.globant.bootcamp.finalshopping.repositories.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,9 @@ public class CartServiceJPA implements CartService {
     private CartRepository repo;
 
     @Autowired
-    public CartServiceJPA(CartRepository repo){
-        this.repo=repo;
+    public CartServiceJPA(CartRepository repoCart){
+
+        this.repo=repoCart;
     }
 
     @Override
@@ -47,12 +47,5 @@ public class CartServiceJPA implements CartService {
     @Override
     public List<Cart> getAll() {
         return repo.findAll();
-    }
-
-    @Override
-    public Sale buy(Cart cart, Sale.Mode mode) {
-
-        Sale ret = new Sale(cart, mode);
-        return ret;
     }
 }
