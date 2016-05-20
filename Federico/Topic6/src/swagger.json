@@ -1,0 +1,107 @@
+{
+  "swagger" : "2.0" ,
+  "info" : {
+    "version" : "1.0" ,
+    "title" : "Shopping Cart REST API"
+  } ,
+  "consumes" : ["application/json"] ,
+  "produces" : ["application/json"] ,
+  "paths" : {
+    "/catalogs" : {
+      "get" : {
+        "description" : "" ,
+        "responses" : {
+          "200" : {
+            "description" : "" ,
+            "type" : "array" ,
+            "items" : {
+              "type" : "object" ,
+              "properties" : {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "double"
+                },
+                "desc": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    } ,
+    "/catalog" : {
+      "get" : {
+        "description": "",
+        "parameters" : [{"name" : "id" , "in" : "query" , "required" : true }] ,
+        "responses": {
+          "200": {
+            "description": "",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "price": {
+                "type": "double"
+              },
+              "desc": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          }
+        }
+      } ,
+
+      "post" : {
+        "description" : "",
+        "parameters" : [{"name" : "prod" , "in" : "body" , "required" : true }] ,
+        "responses" : {
+          "201" : {
+            "description" : ""
+          } ,
+          "400" : {
+            "description" : ""
+          }
+        }
+      } ,
+
+      "put" : {
+        "description" : "" ,
+        "parameters" : [{"name" : "prod" , "in" : "body" , "required" : true }] ,
+        "responses" : {
+          "200" : {
+            "description" : ""
+          } ,
+          "400" : {
+            "description" : ""
+          }
+        }
+      } ,
+
+      "delete" : {
+        "description" : "" ,
+        "parameters" : [{"name" : "id" , "in" : "query" , "required" : true }] ,
+        "responses" : {
+          "200" : {
+            "description" : ""
+          } ,
+          "400" : {
+            "description" : ""
+          }
+        }
+      }
+    }
+  }
+}
