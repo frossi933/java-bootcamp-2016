@@ -24,7 +24,7 @@ public class SessionServiceJPA implements SessionService {
         Session old = repo.findByUsername(session.getUsername());
         if(old != null)
             /* It is already logged */
-             return false;
+            repo.delete(old);
 
         repo.save(session);
         return true;

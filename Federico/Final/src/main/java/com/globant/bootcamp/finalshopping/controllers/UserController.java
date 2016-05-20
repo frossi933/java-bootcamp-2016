@@ -65,7 +65,7 @@ public class UserController {
             else
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         else
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
     }
 
 

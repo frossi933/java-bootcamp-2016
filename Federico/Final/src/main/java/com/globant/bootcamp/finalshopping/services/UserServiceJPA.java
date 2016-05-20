@@ -18,7 +18,8 @@ public class UserServiceJPA implements UserService {
 
     @Override
     public boolean add(User u) {
-        if(repo.exists(u.getId()))
+        User old = repo.getByName(u.getName());
+        if(old != null)
             return false;
 
         repo.save(u);
@@ -55,6 +56,6 @@ public class UserServiceJPA implements UserService {
 
     @Override
     public User findByName(String name){
-        return repo.findByName(name);
+        return repo.getByName(name);
     }
 }

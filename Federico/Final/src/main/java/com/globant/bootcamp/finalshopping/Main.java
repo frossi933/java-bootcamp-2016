@@ -1,6 +1,8 @@
 package com.globant.bootcamp.finalshopping;
 
+import com.globant.bootcamp.finalshopping.model.Product;
 import com.globant.bootcamp.finalshopping.model.User;
+import com.globant.bootcamp.finalshopping.repositories.ProductRepository;
 import com.globant.bootcamp.finalshopping.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
