@@ -1,16 +1,11 @@
 package com.globant.bootcamp.finalshopping;
 
-import com.globant.bootcamp.finalshopping.model.Product;
 import com.globant.bootcamp.finalshopping.model.User;
-import com.globant.bootcamp.finalshopping.repositories.ProductRepository;
 import com.globant.bootcamp.finalshopping.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.AbstractApplicationContext;
-
 import java.util.logging.Logger;
 
 @SpringBootApplication

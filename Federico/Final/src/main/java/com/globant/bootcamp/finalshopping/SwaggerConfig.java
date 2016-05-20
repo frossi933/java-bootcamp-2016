@@ -1,8 +1,10 @@
 package com.globant.bootcamp.finalshopping;
 
+import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -19,9 +21,9 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("api-infos")
                 .apiInfo(apiInfo())
-                //.directModelSubstitute(LocalDateTime.class, Date.class)
                 .select()
-                .paths(regex("/*"))
+                .apis(Predicates.not(RequestHandlerSelectors.basePackage("org.springframework.boot")))
+                .paths(regex(".*/*.*"))
                 .build();
     }
 
